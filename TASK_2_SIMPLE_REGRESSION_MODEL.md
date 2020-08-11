@@ -8,19 +8,19 @@ given the number of Hours studied.
 
 # Loading Necessary Library
 
-``` r
-library(caTools)
-library(ggplot2)
-library(Metrics)
-```
-
-    ## Warning: package 'Metrics' was built under R version 3.6.3
-
 # Loading Data
 
 ``` r
 dataset <- read.csv('http://bit.ly/w-data')
 ```
+
+# Checking Missing Value
+
+``` r
+missmap(dataset)
+```
+
+![](TASK_2_SIMPLE_REGRESSION_MODEL_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
 # Initial Analysis On Dataset
 
