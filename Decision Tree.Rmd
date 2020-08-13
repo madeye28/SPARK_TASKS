@@ -1,0 +1,101 @@
+---
+title: "TASK 4: Decision Tree Algorithm"
+output: github_document
+---
+
+# Objective 
+
+  The main Objective of this task is to give a visual representaion of how a Decision Tree Algorithm Classifies the Dataset.
+ 
+ 
+# Importing Necessary Library 
+
+  We will import the necessary library for the creating a decision tree model.
+ 
+```{r message = FALSE,warning = FALSE}
+library(rpart)
+library(rpart.plot)
+library(ggplot2)
+library(tidyverse)
+library(Amelia)
+```
+
+# Importing Data
+
+  As we all know that "iris" dataset is a famous dataset and it is available in almost in all Machine language. We will have a look into the dataset.
+  
+
+```{r}
+head(iris)
+```
+
+* We will see what are the variables in *iris* dataset.
+
+
+# Missing Value
+
+```{r}
+missmap(iris)
+```
+
+* From the above missing map, we can see our data doesnot have any missing value
+
+
+
+
+
+```{r cars}
+names(iris)
+```
+
+* we can see that,
+  * Dependent Varaiable  - Species
+  * Independent Variable - Sepal.Length, Sepal.Width, Petal.Length, Petal.Width
+
+* The classification in the dependent variable 
+
+```{r}
+unique(iris$Species)
+```
+
+* So there are total of three classifaication in the dependent variable.
+
+```{r}
+
+
+iris %>%
+  ggplot(aes(Species)) +
+  geom_bar(aes(fill = Species),alpha = 0.6,color = 'black',width = 0.5)
+
+
+
+```
+
+
+* There are total of 150 record with 50 in each category.
+
+# Creating Decision Tree Model
+
+```{r}
+tree <- rpart(Species~.,data = iris,method = 'class',cp = 0.01)
+```
+
+* Complexity Parameter is like a learning parameter, that will be used to control the size of our decision tree.
+
+* In our case the cp value of 0.01 is selected by parameter turning. and finding the cp with lower error, which can be found below
+
+```{r}
+printcp(tree)
+```
+
+
+* We can see that for a cp of 0.01 the error is minimum of 0.09.
+
+# Visual Split of Decision Tree.
+
+```{r}
+rpart.plot(tree)
+```
+
+
+
