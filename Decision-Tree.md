@@ -13,47 +13,11 @@ model.
 
 ``` r
 library(rpart)
-```
-
-    ## Warning: package 'rpart' was built under R version 3.6.3
-
-``` r
 library(rpart.plot)
-```
-
-    ## Warning: package 'rpart.plot' was built under R version 3.6.3
-
-``` r
 library(ggplot2)
 library(tidyverse)
+library(Amelia)
 ```
-
-    ## Warning: package 'tidyverse' was built under R version 3.6.3
-
-    ## -- Attaching packages ------------------- tidyverse 1.3.0 --
-
-    ## v tibble  3.0.1     v dplyr   0.8.5
-    ## v tidyr   1.0.2     v stringr 1.4.0
-    ## v readr   1.3.1     v forcats 0.5.0
-    ## v purrr   0.3.4
-
-    ## Warning: package 'tibble' was built under R version 3.6.3
-
-    ## Warning: package 'tidyr' was built under R version 3.6.3
-
-    ## Warning: package 'readr' was built under R version 3.6.3
-
-    ## Warning: package 'purrr' was built under R version 3.6.3
-
-    ## Warning: package 'dplyr' was built under R version 3.6.3
-
-    ## Warning: package 'stringr' was built under R version 3.6.3
-
-    ## Warning: package 'forcats' was built under R version 3.6.3
-
-    ## -- Conflicts ---------------------- tidyverse_conflicts() --
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
 
 # Importing Data
 
@@ -74,6 +38,17 @@ head(iris)
     ## 6          5.4         3.9          1.7         0.4  setosa
 
   - We will see what are the variables in *iris* dataset.
+
+# Missing Value
+
+``` r
+missmap(iris)
+```
+
+![](Decision-Tree_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+  - From the above missing map, we can see our data doesnot have any
+    missing value
 
 <!-- end list -->
 
@@ -109,7 +84,7 @@ iris %>%
   geom_bar(aes(fill = Species),alpha = 0.6,color = 'black',width = 0.5)
 ```
 
-![](TASK_4_DECISION_TREE_ALGORITHM_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](Decision-Tree_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
   - There are total of 150 record with 50 in each category.
 
@@ -143,9 +118,9 @@ printcp(tree)
     ## n= 150 
     ## 
     ##     CP nsplit rel error xerror     xstd
-    ## 1 0.50      0      1.00   1.10 0.054160
-    ## 2 0.44      1      0.50   0.59 0.059828
-    ## 3 0.01      2      0.06   0.07 0.025833
+    ## 1 0.50      0      1.00   1.14 0.052307
+    ## 2 0.44      1      0.50   0.69 0.061041
+    ## 3 0.01      2      0.06   0.09 0.029086
 
   - We can see that for a cp of 0.01 the error is minimum of 0.09.
 
@@ -155,4 +130,4 @@ printcp(tree)
 rpart.plot(tree)
 ```
 
-![](TASK_4_DECISION_TREE_ALGORITHM_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](Decision-Tree_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->

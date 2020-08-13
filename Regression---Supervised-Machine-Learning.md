@@ -8,6 +8,13 @@ given the number of Hours studied.
 
 # Loading Necessary Library
 
+``` r
+library(caTools)
+library(ggplot2)
+library(Metrics)
+library(Amelia)
+```
+
 # Loading Data
 
 ``` r
@@ -17,10 +24,12 @@ dataset <- read.csv('http://bit.ly/w-data')
 # Checking Missing Value
 
 ``` r
-missmap(dataset)
+missmap(dataset,col = c('Yellow','black'))
 ```
 
-![](TASK_2_SIMPLE_REGRESSION_MODEL_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](Regression---Supervised-Machine-Learning_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+We can see, our dataset has no missing value.
 
 # Initial Analysis On Dataset
 
@@ -68,7 +77,7 @@ ggplot(dataset,aes(x= Hours,y= Scores)) +
   ggtitle('Hours Vs Scores')
 ```
 
-![](TASK_2_SIMPLE_REGRESSION_MODEL_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](Regression---Supervised-Machine-Learning_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 From the above scattern plot we can clearly see, there is a positive
 correlation, and the positive correlation can be found below.
@@ -151,7 +160,7 @@ ggplot(dataset,aes(x= Hours,y= Scores)) +
 
     ## `geom_smooth()` using formula 'y ~ x'
 
-![](TASK_2_SIMPLE_REGRESSION_MODEL_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](Regression---Supervised-Machine-Learning_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 ## Prediction on test dataset
 

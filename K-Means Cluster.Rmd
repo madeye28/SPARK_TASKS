@@ -1,0 +1,100 @@
+---
+title: "TASK 3 K-Means Cluster"
+output: github_document
+---
+
+# Objective
+
+* So the objective of cluster or group datas which are similar in nature using K-Means cluster Algorithm .This Clustering comes under Uusuperwised Machine learning Models.
+
+
+
+# Loading Dataset
+* We will be usign *iris*  dataset, which is an in build dataset in R language. We will have a look at it column names and sampel of top 5 entries.
+
+```{r}
+names(iris)
+```
+```{r}
+head(iris)
+```
+
+
+# Loading Necesasry Library
+
+```{r message = FALSE,warning = FALSE}
+library(Amelia)
+library(factoextra)
+library(NbClust)
+require(cluster)
+library(tidyverse)
+```
+
+# Check for Missing value.
+
+```{r}
+missmap(iris)
+```
+
+* We can see that there is no missing data. so we can proceed furture.
+
+
+# Removing the dependent variable from the dataset.
+
+* since our iris dataset consist of the dependent variable (Species), it should be removed before creating out cluster model.
+
+```{r}
+df <- iris[,-5]
+```
+* now with our independent variable removed, we will have to decide the number of clusted, for our dataset.
+
+* SO inoreder to find the optimum Cluster value there are various methords we are using the classic *Elbow Methord* 
+
+```{r}
+fviz_nbclust(df, kmeans, method = "wss") +
+  geom_vline(xintercept = 3, linetype = 2)+
+  labs(subtitle = "Elbow method")
+```
+
+
+* From the above Graph we can clearly see that, number of clusters should be 3. where which the average within sum of squares are starting to reduce.
+
+*Number of Clusters  = 3*
+
+# Model Building
+
+* We will be creating a K-Meand Cluster algorithm wiht out *iris* dataset.
+
+```{r}
+k_means <- kmeans(df, 3, nstart = 25)
+``` 
+
+* So We have created a model with 3 cluster, and now we want to see the number of entries comes into each cluster
+
+
+```{r}
+clust <- k_means$cluster
+as.data.frame(clust) %>% 
+  group_by(clust) %>%
+  count()
+
+```
+
+
+We can see
+
+  * 62 entries are clustered into cluster 1
+  * 50 entries are clustered into cluster 2
+  * 38 entries are clustered into cluster 3
+
+
+# Visual Representation. 
+
+* Now we will have a visual representation of each cluster
+
+
+```{r}
+fviz_cluster(k_means, df, geom = "point")
+```
+
+# Thank You
